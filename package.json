@@ -1,0 +1,8 @@
+{
+    "name":"CH32F103",
+    "Core":"Cortex M3",
+    "Vendor":"wch",
+    "description":"Cortex M3 CH32F103 MCU",
+    "url":"https://github.com/SoCXin/CH32F103",
+    "version":"1.0.0"
+}
