@@ -424,7 +424,7 @@ void TIM_BDTRStructInit(TIM_BDTRInitTypeDef* TIM_BDTRInitStruct)
 
 /*******************************************************************************
 * Function Name  : TIM_Cmd
-* Description    : Fills each TIM_BDTRInitStruct member with its default value.
+* Description    :  Enables or disables the specified TIM peripheral.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
 *                  NewState: ENABLE or DISABLE.
 * Return         : None
@@ -989,7 +989,7 @@ void TIM_OC1PreloadConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPreload)
 
 /*******************************************************************************
 * Function Name  : TIM_OC2PreloadConfig
-* Description    : Enables or disables the TIMx peripheral Preload register on CCR1.
+* Description    : Enables or disables the TIMx peripheral Preload register on CCR2.
 * Input          : TIMx: where x can be 1 to 4 to select the TIM peripheral.
 *                  TIM_OCPreload: new state of the TIMx peripheral Preload register.
 *                    TIM_OCPreload_Enable.

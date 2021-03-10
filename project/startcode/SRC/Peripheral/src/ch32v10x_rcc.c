@@ -106,7 +106,7 @@ void RCC_HSEConfig(uint32_t RCC_HSE)
 
 /*******************************************************************************
 * Function Name  : RCC_WaitForHSEStartUp
-* Description    : Configures the External High Speed oscillator (HSE).
+* Description    : Waits for HSE start-up.
 * Input          : None
 * Return         : SUCCESS: HSE oscillator is stable and ready to use.
 *                  ERROR: HSE oscillator not yet ready.
@@ -232,7 +232,7 @@ void RCC_SYSCLKConfig(uint32_t RCC_SYSCLKSource)
 
 /*******************************************************************************
 * Function Name  : RCC_GetSYSCLKSource
-* Description    : Configures the system clock (SYSCLK).
+* Description    : Returns the clock source used as system clock.
 * Input          : None
 * Return         : 0x00: HSI used as system clock.
 *                  0x04: HSE used as system clock.
@@ -459,10 +459,10 @@ void RCC_RTCCLKCmd(FunctionalState NewState)
 
 /*******************************************************************************
 * Function Name  : RCC_GetClocksFreq
-* Description    : RCC_Clocks: pointer to a RCC_ClocksTypeDef structure which will hold
-*      the clocks frequencies.
-* Input          : The result of this function could be not correct when using
+* Description    : The result of this function could be not correct when using
 *      fractional value for HSE crystal.
+* Input          : RCC_Clocks: pointer to a RCC_ClocksTypeDef structure which will hold
+*      the clocks frequencies.
 * Return         : None
 ********************************************************************************/
 void RCC_GetClocksFreq(RCC_ClocksTypeDef* RCC_Clocks)
@@ -488,7 +488,12 @@ void RCC_GetClocksFreq(RCC_ClocksTypeDef* RCC_Clocks)
       
       if (pllsource == 0x00)
       {
-        RCC_Clocks->SYSCLK_Frequency = (HSI_VALUE >> 1) * pllmull;
+				if(EXTEN->EXTEN_CTR & EXTEN_PLL_HSI_PRE){			
+				 RCC_Clocks->SYSCLK_Frequency = (HSI_VALUE) * pllmull; 
+				}
+				else{
+				 RCC_Clocks->SYSCLK_Frequency = (HSI_VALUE >>1) * pllmull; 
+				}	
       }
       else
       {

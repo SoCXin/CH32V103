@@ -287,7 +287,7 @@ void ADC_StartCalibration(ADC_TypeDef* ADCx)
 
 /*******************************************************************************
 * Function Name  : ADC_GetCalibrationStatus
-* Description    : Starts the selected ADC calibration process.
+* Description    : Gets the selected ADC calibration status.
 * Input          : ADCx:
 *                    where x can be 1 to select the ADC peripheral.
 * Return         : FlagStatus: SET or RESET.

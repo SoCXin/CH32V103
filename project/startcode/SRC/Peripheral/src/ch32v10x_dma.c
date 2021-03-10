@@ -218,8 +218,8 @@ void DMA_SetCurrDataCounter(DMA_Channel_TypeDef* DMAy_Channelx, uint16_t DataNum
 }
 
 /********************************************************************************
-* Function Name  : DMA_SetCurrDataCounter
-* Description    : Sets the number of data units in the current DMAy Channelx transfer.
+* Function Name  : DMA_GetCurrDataCounter
+* Description    : Returns the number of remaining data units in the current DMAy Channelx transfer.
 * Input          : DMAy_Channelx: where y can be 1 or 2 to select the DMA and x can 
 *                                 be 1 to 7 for DMA1 and 1 to 5 for DMA2 to select  
 *                                 the DMA Channel.                                
@@ -463,7 +463,7 @@ ITStatus DMA_GetITStatus(uint32_t DMAy_IT)
 /********************************************************************************
 * Function Name  : DMA_ClearITPendingBit
 * Description    : Clears the DMAy Channelx's interrupt pending bits.
-* Input          : DMAy_IT: specifies the DMAy interrupt source to check. 
+* Input          : DMAy_IT: specifies the DMAy interrupt source to clear. 
 *                      DMA1_IT_GL1: DMA1 Channel1 global flag. 
 *                      DMA1_IT_TC1: DMA1 Channel1 transfer complete flag.
 *                      DMA1_IT_HT1: DMA1 Channel1 half transfer flag.

@@ -49,7 +49,7 @@ void BKP_TamperPinLevelConfig(uint16_t BKP_TamperPinLevel)
 
 /*******************************************************************************
 * Function Name  : BKP_TamperPinCmd
-* Description    : Configures the Tamper Pin active level.
+* Description    : Enables or disables the Tamper Pin activation.
 * Input          : NewState: ENABLE or DISABLE.
 * Return         : None
 *******************************************************************************/	

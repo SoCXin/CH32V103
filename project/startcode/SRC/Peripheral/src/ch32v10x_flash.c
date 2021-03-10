@@ -839,7 +839,11 @@ void FLASH_BufReset(void)
 /********************************************************************************
 * Function Name  : FLASH_BufLoad
 * Description    : Flash Buffer load(128 bit).
-* Input          : None
+* Input          : Address: specifies the address to be programmed.
+*                  Data0: specifies the data0 to be programmed.
+*                  Data1: specifies the data1 to be programmed.
+*                  Data2: specifies the data2 to be programmed.
+*                  Data3: specifies the data3 to be programmed.
 * Return         : None
 *********************************************************************************/
 void FLASH_BufLoad(uint32_t Address, uint32_t Data0, uint32_t Data1, uint32_t Data2, uint32_t Data3)

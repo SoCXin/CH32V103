@@ -526,7 +526,7 @@ void SPI_I2S_ClearFlag(SPI_TypeDef* SPIx, uint16_t SPI_I2S_FLAG)
 
 /*******************************************************************************
 * Function Name  : SPI_I2S_GetITStatus
-* Description    : Clears the SPIx CRC Error (CRCERR) flag.
+* Description    : Checks whether the specified SPI/I2S interrupt has occurred or not.
 * Input          : SPIx: where x can be
 *                    - 1, 2 or 3 in SPI mode.
 *                    - 2 or 3 in I2S mode.
