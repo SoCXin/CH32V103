@@ -17,7 +17,7 @@
     "Core": {
         "num": 1,
         "architecture":"RISC-V3A",
-        "Freq":[8,48]
+        "Freq":[8,80]
     },
     "TIM": {
         "resolution":[16,16,16],
