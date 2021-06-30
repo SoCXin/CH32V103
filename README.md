@@ -28,4 +28,6 @@
 
 [CH32V103](https://github.com/SoCXin/CH32V103)
 
+[![sites](docs/diff.png)](http://www.wch.cn/products/CH32V103.html)
+
 ### [探索芯世界 www.SoC.xin](http://www.SoC.Xin)
