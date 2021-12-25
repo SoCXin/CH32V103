@@ -3,7 +3,7 @@
 [![sites](http://182.61.61.133/link/resources/SoC.png)](http://www.SoC.Xin)
 
 * [WCH](http://www.wch.cn/)：[RISC-V3A](https://github.com/SoCXin/RISC-V)
-* [L4R4](https://github.com/SoCXin/Level)：80 MHz
+* [L3R3](https://github.com/SoCXin/Level)：80 MHz
 
 ## [简介](https://github.com/SoCXin/CH32V103/wiki)
 
@@ -22,6 +22,7 @@
 * [参考资源](src/)
 * [参考文档](docs/)
 * [参考工程](project/)
+* [入门文档](https://docs.soc.xin/CH32V103)
 
 
 ### [选型建议](https://github.com/SoCXin)
