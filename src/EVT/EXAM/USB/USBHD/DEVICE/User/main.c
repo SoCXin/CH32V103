@@ -1,10 +1,12 @@
 /********************************** (C) COPYRIGHT *******************************
-* File Name          : main.c
-* Author             : WCH
-* Version            : V1.0.0
-* Date               : 2020/04/30
-* Description        : Main program body.
-*******************************************************************************/
+ * File Name          : main.c
+ * Author             : WCH
+ * Version            : V1.0.0
+ * Date               : 2020/04/30
+ * Description        : Main program body.
+ * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+ * SPDX-License-Identifier: Apache-2.0
+ *******************************************************************************/
 
 /*
  *@Note
@@ -79,12 +81,13 @@ __attribute__ ((aligned(4))) UINT8 EP7_Databuf[64+64];	//ep7_out(64)+ep7_in(64)
 
 void USBHD_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
 
-/*******************************************************************************
-* Function Name  : Set_USBConfig
-* Description    : Set USB clock.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Set_USBConfig
+ *
+ * @brief   Set USB clock.
+ *
+ * @return  none
+ */
 void USBHD_ClockCmd(UINT32 RCC_USBCLKSource,FunctionalState NewState)
 {
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, NewState);
@@ -93,12 +96,13 @@ void USBHD_ClockCmd(UINT32 RCC_USBCLKSource,FunctionalState NewState)
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_USBHD,NewState);
 }
 
-/*******************************************************************************
-* Function Name  : USB_DevTransProcess
-* Description    : USB device transfer process.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USB_DevTransProcess
+ *
+ * @brief   USB device transfer process.
+ *
+ * @return  none
+ */
 void USB_DevTransProcess( void )
 {
 	UINT8  len, chtype;
@@ -440,12 +444,13 @@ void USB_DevTransProcess( void )
 	}
 }
 
-/*******************************************************************************
-* Function Name  : main
-* Description    : Main program.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      main
+ *
+ * @brief   Main program.
+ *
+ * @return  none
+ */
 int main(void)
 {
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
@@ -474,12 +479,15 @@ int main(void)
 
 }
 
-/*******************************************************************************
-* Function Name  : DevEP1_OUT_Deal
-* Description    : Deal device Endpoint 1 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP1_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 1 OUT.
+ *
+ * @param   l: Data length.
+ *
+ * @return  none
+ */
 void DevEP1_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
@@ -492,12 +500,15 @@ void DevEP1_OUT_Deal( UINT8 l )
 	DevEP1_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : DevEP2_OUT_Deal
-* Description    : Deal device Endpoint 2 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP2_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 2 OUT.
+ *
+ * @param   l: Data length.
+ *
+ * @return  none
+ */
 void DevEP2_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
@@ -510,12 +521,15 @@ void DevEP2_OUT_Deal( UINT8 l )
 	DevEP2_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : DevEP3_OUT_Deal
-* Description    : Deal device Endpoint 3 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP3_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 3 OUT.
+ *
+ * @param   l: Data length.
+ *
+ * @return  none
+ */
 void DevEP3_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
@@ -528,12 +542,15 @@ void DevEP3_OUT_Deal( UINT8 l )
 	DevEP3_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : DevEP4_OUT_Deal
-* Description    : Deal device Endpoint 4 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP4_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 4 OUT.
+ *
+ * @param   l: Data length.
+ *
+ * @return  none
+ */
 void DevEP4_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
@@ -546,12 +563,15 @@ void DevEP4_OUT_Deal( UINT8 l )
 	DevEP4_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : DevEP5_OUT_Deal
-* Description    : Deal device Endpoint 5 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP5_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 5 OUT.
+ *
+ * @param   l: Data length.
+ *
+ * @return  none
+ */
 void DevEP5_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
@@ -564,12 +584,15 @@ void DevEP5_OUT_Deal( UINT8 l )
 	DevEP5_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : DevEP6_OUT_Deal
-* Description    : Deal device Endpoint 6 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP6_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 6 OUT.
+ *
+ * @param   l: Data length.
+ *
+ * @return  none
+ */
 void DevEP6_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
@@ -582,12 +605,15 @@ void DevEP6_OUT_Deal( UINT8 l )
 	DevEP6_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : DevEP7_OUT_Deal
-* Description    : Deal device Endpoint 7 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP7_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 7 OUT.
+ *
+ * @param   l: Data length.
+ *
+ * @return  none
+ */
 void DevEP7_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
@@ -600,12 +626,13 @@ void DevEP7_OUT_Deal( UINT8 l )
 	DevEP7_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : USB_IRQHandler
-* Description    : This function handles USB exception.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USB_IRQHandler
+ *
+ * @brief   This function handles USB exception.
+ *
+ * @return  none
+ */
 void USBHD_IRQHandler (void)
 {
 	USB_DevTransProcess();

@@ -1,10 +1,12 @@
 /********************************** (C) COPYRIGHT *******************************
-* File Name          : main.c
-* Author             : WCH
-* Version            : V1.0.0
-* Date               : 2020/04/30
-* Description        : Main program body.
-*******************************************************************************/
+ * File Name          : main.c
+ * Author             : WCH
+ * Version            : V1.0.0
+ * Date               : 2020/04/30
+ * Description        : Main program body.
+ * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+ * SPDX-License-Identifier: Apache-2.0
+ *******************************************************************************/
 
 /*
  *@Note
@@ -16,60 +18,60 @@
 
 #include "debug.h"
 
-/*******************************************************************************
-* Function Name  : BKP_Tamper_Init
-* Description    : Initializes the BKP Tamper.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      BKP_Tamper_Init
+ *
+ * @brief   Initializes the BKP Tamper.
+ *
+ * @return  none
+ */
 void BKP_Tamper_Init(void)
 {
-	NVIC_InitTypeDef NVIC_InitStructure;
+    NVIC_InitTypeDef NVIC_InitStructure = {0};
 
-	RCC_APB1PeriphClockCmd( RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE );
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);
 
-	BKP_TamperPinCmd( DISABLE );
-  PWR_BackupAccessCmd( ENABLE );
+    BKP_TamperPinCmd(DISABLE);
+    PWR_BackupAccessCmd(ENABLE);
     BKP_ClearFlag();
 
-	BKP_WriteBackupRegister( BKP_DR1, 0x9880 );
-	BKP_WriteBackupRegister( BKP_DR2, 0x5678 );
-	BKP_WriteBackupRegister( BKP_DR3, 0xABCD );
-	BKP_WriteBackupRegister( BKP_DR4, 0x3456 );
+    BKP_WriteBackupRegister(BKP_DR1, 0x9880);
+    BKP_WriteBackupRegister(BKP_DR2, 0x5678);
+    BKP_WriteBackupRegister(BKP_DR3, 0xABCD);
+    BKP_WriteBackupRegister(BKP_DR4, 0x3456);
 
-	printf( "BKP_DR1:%08x\r\n", BKP->DATAR1 );
-	printf( "BKP_DR2:%08x\r\n", BKP->DATAR2 );
-	printf( "BKP_DR3:%08x\r\n", BKP->DATAR3 );
-  printf( "BKP_DR4:%08x\r\n", BKP->DATAR4 );
+    printf("BKP_DR1:%08x\r\n", BKP->DATAR1);
+    printf("BKP_DR2:%08x\r\n", BKP->DATAR2);
+    printf("BKP_DR3:%08x\r\n", BKP->DATAR3);
+    printf("BKP_DR4:%08x\r\n", BKP->DATAR4);
 
-	BKP_TamperPinLevelConfig( BKP_TamperPinLevel_High );  //TPAL:0£¬PC13 set input-pull-down
-//	BKP_TamperPinLevelConfig( BKP_TamperPinLevel_Low );	 //TPAL:1£¬PC13 input-pull-up
+    BKP_TamperPinLevelConfig(BKP_TamperPinLevel_High); //TPAL:0£¬PC13 set input-pull-down
+                                                       //	BKP_TamperPinLevelConfig( BKP_TamperPinLevel_Low );	 //TPAL:1£¬PC13 input-pull-up
 
-	NVIC_InitStructure.NVIC_IRQChannel = TAMPER_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init( &NVIC_InitStructure );
+    NVIC_InitStructure.NVIC_IRQChannel = TAMPER_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
 
-	BKP_ITConfig( ENABLE );
-	BKP_TamperPinCmd( ENABLE );
+    BKP_ITConfig(ENABLE);
+    BKP_TamperPinCmd(ENABLE);
 }
 
-/*******************************************************************************
-* Function Name  : main
-* Description    : Main program.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      main
+ *
+ * @brief   Main program.
+ *
+ * @return  none
+ */
 int main(void)
 {
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
-	USART_Printf_Init(115200);
-	printf("SystemClk:%d\r\n",SystemCoreClock);
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+    USART_Printf_Init(115200);
+    printf("SystemClk:%d\r\n", SystemCoreClock);
 
-	BKP_Tamper_Init();
+    BKP_Tamper_Init();
 
-	while(1);
+    while(1);
 }
-
-

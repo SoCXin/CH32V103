@@ -1,11 +1,12 @@
 /********************************** (C) COPYRIGHT *******************************
-* File Name          : main.c
-* Author             : WCH
-* Version            : V1.0.0
-* Date               : 2020/04/30
-* Description        : RCC configuration reference system_ch32v10x.h and 
-                       system_ch32v10x.c file.
-*******************************************************************************/
+ * File Name          : main.c
+ * Author             : WCH
+ * Version            : V1.0.0
+ * Date               : 2020/04/30
+ * Description        : Main program body.
+ * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+ * SPDX-License-Identifier: Apache-2.0
+ *******************************************************************************/
 
 /*
  *@Note
@@ -18,23 +19,24 @@
 */
 #include "debug.h"
 
-#define HSI      0   //HSI
-#define HSI_1_2  1   //HSI/2
+#define HSI           0    //HSI
+#define HSI_1_2       1    //HSI/2
 
-#define PLL_Source   HSI
+#define PLL_Source    HSI
 //#define PLL_Source   HSI_1_2
 
-/*******************************************************************************
-* Function Name  : main
-* Description    : Main program.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      main
+ *
+ * @brief   Main program.
+ *
+ * @return  none
+ */
 int main(void)
 {
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
     USART_Printf_Init(115200);
-    printf("SystemClk:%d\r\n",SystemCoreClock);
+    printf("SystemClk:%d\r\n", SystemCoreClock);
 
     while(1);
 }

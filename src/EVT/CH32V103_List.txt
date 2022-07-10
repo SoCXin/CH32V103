@@ -33,7 +33,9 @@ http://wch.cn
   |      |      |      |      |-- DMA_MEM2PERIP：储存器到外设模式、外设到储存器模式例程见各外设子例程
   |      |      |      |-- EXTI：外部中断线例程
   |      |      |      |-- FLASH：FLASH的擦/读/写，以及快速编程
+  |      |      |      |-- FreeRTOS：FreeRTOS移植例程   
   |      |      |      |-- GPIO：GPIO例程
+  |      |      |      |-- HarmonyOS：HarmonyOS移植例程   
   |      |      |      |-- I2C
   |      |      |      |      |-- I2C_7bit_Mode：7位地址模式，Master/Slave 模式收发例程
   |      |      |      |      |-- I2C_10bit_Mode：10位地址模式，Master/Slave 模式收发例程
@@ -49,6 +51,7 @@ http://wch.cn
   |      |      |      |      |-- MCO：MCO引脚时钟输出例程
   |      |      |      |      |-- HSI_PLL_Source：HSI或HSI/2作为PLL输入时钟例程   
   |      |      |      |-- RTC：日历例程
+  |      |      |      |-- RT-Thread：RT-Thread移植例程  
   |      |      |      |-- SPI
   |      |      |      |      |-- 1Lines_half-duplex：单线半双工模式，Master/Slave 模式数据收发
   |      |      |      |      |-- 2Lines_FullDuplex：双线全双工模式，Master/Slave 模式数据收发
@@ -56,6 +59,7 @@ http://wch.cn
   |      |      |      |      |-- SPI_CRC：使用CRC错误校验，Master/Slave 模式收发例程
   |      |      |      |      |-- SPI_DMA：SPI使用DMA，Master/Slave 模式收发例程
   |      |      |      |      |-- SPI_FLASH：SPI接口操作FLASH外设例程
+  |      |      |      |-- TencentOS：TencentOS移植例程    
   |      |      |      |-- TIM
   |      |      |      |      |-- Clock_Select：时钟源选择例程
   |      |      |      |      |-- ComplementaryOutput_DeadTime：互补输出和死区插入模式例程

@@ -1,10 +1,7 @@
-﻿# [CH32V103](https://github.com/SoCXin/CH32V103)
-
-[![sites](http://182.61.61.133/link/resources/SoC.png)](http://www.SoC.Xin)
+﻿# [CH32V103](https://docs.soc.xin/CH32V103)
 
 * [WCH](http://www.wch.cn/)：[RISC-V3A](https://github.com/SoCXin/RISC-V)
-* [L3R3](https://github.com/SoCXin/Level)：80 MHz
-* [Xin文档](https://docs.soc.xin/CH32V103)
+* [L2R2](https://github.com/SoCXin/Level)：80 MHz
 
 ## [简介](https://github.com/SoCXin/CH32V103/wiki)
 
@@ -24,11 +21,10 @@
 * [参考文档](docs/)
 * [参考工程](project/)
 
-
 ### [选型建议](https://github.com/SoCXin)
 
 [CH32V103](https://github.com/SoCXin/CH32V103)
 
 [![sites](docs/diff.png)](http://www.wch.cn/products/CH32V103.html)
 
-### [探索芯世界 www.SoC.xin](http://www.SoC.Xin)
+### [www.SoC.xin](http://www.SoC.Xin)

@@ -1,10 +1,12 @@
 /********************************** (C) COPYRIGHT *******************************
-* File Name          : main.c
-* Author             : WCH
-* Version            : V1.0.0
-* Date               : 2020/04/30
-* Description        : Main program body.
-*******************************************************************************/
+ * File Name          : main.c
+ * Author             : WCH
+ * Version            : V1.0.0
+ * Date               : 2020/04/30
+ * Description        : Main program body.
+ * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+ * SPDX-License-Identifier: Apache-2.0
+ *******************************************************************************/
 
 /*
  *@Note
@@ -80,12 +82,13 @@ __attribute__ ((aligned(4))) UINT8 EP7_Databuf[64+64];	//ep7_out(64)+ep7_in(64)
 
 void USBHD_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
 
-/*******************************************************************************
-* Function Name  : Set_USBConfig
-* Description    : Set USB clock.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Set_USBConfig
+ *
+ * @brief   Set USB clock.
+ *
+ * @return  none
+ */
 void USBHD_ClockCmd(UINT32 RCC_USBCLKSource,FunctionalState NewState)
 {
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, NewState);
@@ -94,12 +97,13 @@ void USBHD_ClockCmd(UINT32 RCC_USBCLKSource,FunctionalState NewState)
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_USBHD,NewState);
 }
 
-/*******************************************************************************
-* Function Name  : USB_DevTransProcess
-* Description    : USB device transfer process.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USB_DevTransProcess
+ *
+ * @brief   USB device transfer process.
+ *
+ * @return  none
+ */
 void USB_DevTransProcess( void )
 {
 	UINT8  len, chtype;
@@ -441,15 +445,16 @@ void USB_DevTransProcess( void )
 	}
 }
 
-/*******************************************************************************
-* Function Name  : ADC_Function_Init
-* Description    : Initializes ADC collection.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      ADC_Function_Init
+ *
+ * @brief   Initializes ADC collection.
+ *
+ * @return  none
+ */
 void ADC_Function_Init(void)
 {
-	ADC_InitTypeDef ADC_InitStructure;
+	ADC_InitTypeDef ADC_InitStructure={0};
 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 	RCC_ADCCLKConfig(RCC_PCLK2_Div8);
@@ -472,12 +477,15 @@ void ADC_Function_Init(void)
 	while(ADC_GetCalibrationStatus(ADC1));
 }
 
-/*******************************************************************************
-* Function Name  : Get_ADC_Val
-* Description    : Returns ADCx conversion result data.
-* Input          : ch: ADC channel.
-* Return         : The Data conversion value.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Get_ADC_Val
+ *
+ * @brief   Returns ADCx conversion result data.
+ *
+ * @param    ch - ADC channel.
+ *
+ * @return  The Data conversion value.
+ */
 u16 Get_ADC(u8 ch)
 {
 	ADC_RegularChannelConfig(ADC1, ch, 1, ADC_SampleTime_239Cycles5);			
@@ -486,33 +494,36 @@ u16 Get_ADC(u8 ch)
 	return(ADC_GetConversionValue(ADC1));	
 }
 
-/*******************************************************************************
-* Function Name  : Get_ADC_Average
-* Description    : Returns ADCx conversion result average data.
-* Input          : ch£ºADC channel.
-				           times£ºADC conversion times.
-* Return         : conversion result average data.
-*******************************************************************************/
+/*********************************************************************
+ * @fn      Get_ADC_Average
+ *
+ * @brief   Returns ADCx conversion result average data.
+ *
+ * @param    ch - ADC channel.
+ *           times - ADC conversion times.
+ *
+ * @return  conversion result average data.
+ */
 u16 Get_ADC_Average(u8 ch, u8 times)
 {
 	u32 temp_val = 0;
 	u8  t;
 
-	for(t=0;t<times; t++)
-	{
+	for(t=0;t<times; t++){
 		temp_val += Get_ADC(ch);
 		Delay_Ms(1);
 	}
 	return(temp_val/times);
 }
 
-/*******************************************************************************
-* Function Name  : IC_Voltage_Check
-* Description    : IC working voltage detection.
-* Input          : None
-* Return         : 0£º3.3V
-*                  1£º5V
-*******************************************************************************/
+/*********************************************************************
+ * @fn      IC_Voltage_Check
+ *
+ * @brief   IC working voltage detection.
+ *
+ * @return  0 - 3.3V
+ *          1 - 5V
+ */
 u8 IC_Voltage_Check(void)
 {
 	u16 value;
@@ -528,12 +539,13 @@ u8 IC_Voltage_Check(void)
 	else return(1);
 }
 
-/*******************************************************************************
-* Function Name  : main
-* Description    : Main program.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      main
+ *
+ * @brief   Main program.
+ *
+ * @return  none
+ */
 int main(void)
 {
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
@@ -541,7 +553,8 @@ int main(void)
 	USART_Printf_Init(115200);
 	printf("SystemClk:%d\r\n",SystemCoreClock);
 
-	if(IC_Voltage_Check()){ 
+	if(IC_Voltage_Check())
+	{
 		printf("5V\r\n");
 		EXTEN->EXTEN_CTR |= EXTEN_USB_5V_SEL;
 	}
@@ -568,138 +581,153 @@ int main(void)
 
 }
 
-/*******************************************************************************
-* Function Name  : DevEP1_OUT_Deal
-* Description    : Deal device Endpoint 1 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP1_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 1 OUT.
+ *
+ * @param    l - Data length.
+ *
+ * @return  none
+ */
 void DevEP1_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
 
-	for(i=0; i<l; i++)
-	{
+	for(i=0; i<l; i++){
 		pEP1_IN_DataBuf[i] = ~pEP1_OUT_DataBuf[i];
 	}
 
 	DevEP1_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : DevEP2_OUT_Deal
-* Description    : Deal device Endpoint 2 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP2_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 2 OUT.
+ *
+ * @param    l - Data length.
+ *
+ * @return  none
+ */
 void DevEP2_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
 
-	for(i=0; i<l; i++)
-	{
+	for(i=0; i<l; i++){
 		pEP2_IN_DataBuf[i] = ~pEP2_OUT_DataBuf[i];
 	}
 
 	DevEP2_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : DevEP3_OUT_Deal
-* Description    : Deal device Endpoint 3 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP3_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 3 OUT.
+ *
+ * @param    l - Data length.
+ *
+ * @return  none
+ */
 void DevEP3_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
 
-	for(i=0; i<l; i++)
-	{
+	for(i=0; i<l; i++){
 		pEP3_IN_DataBuf[i] = ~pEP3_OUT_DataBuf[i];
 	}
 
 	DevEP3_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : DevEP4_OUT_Deal
-* Description    : Deal device Endpoint 4 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP4_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 4 OUT.
+ *
+ * @param    l - Data length.
+ *
+ * @return  none
+ */
 void DevEP4_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
 
-	for(i=0; i<l; i++)
-	{
+	for(i=0; i<l; i++){
 		pEP4_IN_DataBuf[i] = ~pEP4_OUT_DataBuf[i];
 	}
 
 	DevEP4_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : DevEP5_OUT_Deal
-* Description    : Deal device Endpoint 5 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP5_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 5 OUT.
+ *
+ * @param    l - Data length.
+ *
+ * @return  none
+ */
 void DevEP5_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
 
-	for(i=0; i<l; i++)
-	{
+	for(i=0; i<l; i++){
 		pEP5_IN_DataBuf[i] = ~pEP5_OUT_DataBuf[i];
 	}
 
 	DevEP5_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : DevEP6_OUT_Deal
-* Description    : Deal device Endpoint 6 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP6_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 6 OUT.
+ *
+ * @param    l - Data length.
+ *
+ * @return  none
+ */
 void DevEP6_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
 
-	for(i=0; i<l; i++)
-	{
+	for(i=0; i<l; i++){
 		pEP6_IN_DataBuf[i] = ~pEP6_OUT_DataBuf[i];
 	}
 
 	DevEP6_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : DevEP7_OUT_Deal
-* Description    : Deal device Endpoint 7 OUT.
-* Input          : l: Data length.
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      DevEP7_OUT_Deal
+ *
+ * @brief   Deal device Endpoint 7 OUT.
+ *
+ * @param    l - Data length.
+ *
+ * @return  none
+ */
 void DevEP7_OUT_Deal( UINT8 l )
 {
 	UINT8 i;
 
-	for(i=0; i<l; i++)
-	{
+	for(i=0; i<l; i++){
 		pEP7_IN_DataBuf[i] = ~pEP7_OUT_DataBuf[i];
 	}
 
 	DevEP7_IN_Deal( l );
 }
 
-/*******************************************************************************
-* Function Name  : USB_IRQHandler
-* Description    : This function handles USB exception.
-* Input          : None
-* Return         : None
-*******************************************************************************/
+/*********************************************************************
+ * @fn      USB_IRQHandler
+ *
+ * @brief   This function handles USB exception.
+ *
+ * @return  none
+ */
 void USBHD_IRQHandler (void)
 {
 	USB_DevTransProcess();
